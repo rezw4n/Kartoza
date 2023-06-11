@@ -19,7 +19,7 @@
                     <nav class="relative max-w-7xl mx-auto flex items-center justify-between px-5" aria-label="Global">
                         <div class="flex items-center flex-1">
                             <div class="flex items-center justify-between w-full md:w-auto">
-                                <a href="#">
+                                <a href="{% url 'Home' %}">
                                     <span class="sr-only">Kartoza</span>
                                     <img src="https://kartoza.com/files/kartoza-logo-only.png" alt="" width="50px">
                                 </a>
@@ -38,25 +38,21 @@
                                 </div>
                             </div>
                             <div class="hidden md:block md:ml-10 md:space-x-10">
-                                <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Home</a>
-
+                                <a href="{% url 'Home' %}" class="font-medium text-gray-500 hover:text-gray-900">Home</a>
                                 <a href="#" class="font-medium text-gray-500 hover:text-gray-900">User Profile</a>
-
                                 <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Edit Profile</a>
-
                                 <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Map</a>
                             </div>
                         </div>
 
                         <div class="hidden md:block text-right">
                             <span class="inline-flex rounded-md shadow-md ring-1 ring-black ring-opacity-5">
-                                <a href="/user/login/"
+                                <a href="{% url 'login' %}"
                                     class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-[#003049] bg-white hover:bg-gray-50">
                                     Log in
                                 </a>
                             </span>
                         </div>
-
                     </nav>
                     <div id="navbar"
                         class="absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right hidden">
@@ -79,23 +75,18 @@
                                 </div>
                             </div>
                             <div class="px-2 pt-2 pb-3 space-y-1">
-                                <a href="/"
+                                <a href="{% url 'Home' %}"
                                     class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Home</a>
 
                                 <a href="#"
                                     class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">User
                                     Profile</a>
 
-                                <a href="#"
-                                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Edit
-                                    Profile</a>
+                                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Edit Profile</a>
 
-                                <a href="#"
-                                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Map</a>
+                                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Map</a>
                             </div>
-                            <a href="/Users/login/"
-                                class="block w-full px-5 py-3 text-center font-medium text-[#4789f5] bg-gray-50 hover:bg-gray-100">
-                                Log in
+                            <a href="/Users/login/" class="block w-full px-5 py-3 text-center font-medium text-[#4789f5] bg-gray-50 hover:bg-gray-100">Log in
                             </a>
                         </div>
                     </div>
@@ -105,7 +96,42 @@
 
                 {% endblock content %}
             </div>
-            <script src="{% static 'index.js' %}"></script>
+<script src="{% static 'index.js' %}"></script>
+<style>
+    ::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  /* input[type=number] {
+    -moz-appearance: textfield;
+  } */
+</style>
 </body>
 
 </html>
