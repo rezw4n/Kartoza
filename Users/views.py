@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from Home.views import Home
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import UserProfile
 from django.core.validators import validate_email
@@ -116,3 +116,7 @@ def User_Map(request):
     )
     user_profiles_json = json.dumps(list(user_profiles))
     return render(request, 'map.html', {'user_profiles_json': user_profiles_json})
+
+def signout(request):
+    logout(request)
+    return redirect(Home)
