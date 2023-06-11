@@ -6,6 +6,7 @@ from .models import UserProfile
 from django.core.validators import validate_email
 from django.contrib.auth.decorators import login_required
 from .forms import UserProfileForm
+import json
 
 # Create your views here.
 def User_Profile(request):
@@ -107,3 +108,11 @@ def edit_profile(request):
     }
 
     return render(request, 'edit_profile.html', context)
+
+def User_Map(request):
+    user_profiles = UserProfile.objects.select_related('user').all().values(
+        'latitude', 'longitude', 'user__first_name', 'user__last_name', 'user__email',
+        'home_address', 'phone_number'
+    )
+    user_profiles_json = json.dumps(list(user_profiles))
+    return render(request, 'map.html', {'user_profiles_json': user_profiles_json})
