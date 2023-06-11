@@ -12,9 +12,6 @@ class UserProfile(models.Model):
     latitude = models.FloatField("Latitude (Y)", validators=[MinValueValidator(-90), MaxValueValidator(90)]) # The latitude is limited within -90 to +90
     longitude = models.FloatField("Longitude (X)", validators=[MinValueValidator(-180), MaxValueValidator(180)]) # The longitude is limited within -180 to +18
 
-    # Defining user's location and returning it as tuple for putting the location into map
-    def userLocation(self):
-            return (self.longitude, self.latitude)
     
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name
