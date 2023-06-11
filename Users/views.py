@@ -10,6 +10,15 @@ import json
 
 # Create your views here.
 def User_Profile(request):
+    """
+    Renders the user profile page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The HTTP response containing the rendered user profile page.
+    """
     user_profile = UserProfile.objects.get(user=request.user)
     context = {'user_profile': user_profile}
     print(user_profile.email)
@@ -17,34 +26,46 @@ def User_Profile(request):
     return render(request, 'user.html', context=context)
 
 def Login(request):
-    if request.user.is_authenticated:
-        return redirect(Home)
+    """
+    Handles user login.
 
-    if request.method == 'POST':
-        username = request.POST.get('email', '')
-        password = request.POST.get('password', '')
-        auth_user = authenticate(username=username, password=password)
-        if auth_user is not None:
-            login(request, auth_user)
-            print("logged in")
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The HTTP response.
+    """
+    try:
+        if request.user.is_authenticated:
             return redirect(Home)
 
-        else:
-            user = UserProfile.objects.get(email=username)
-            auth_user = authenticate(username=user.user.username, password=password)
+        if request.method == 'POST':
+            username = request.POST.get('email', '')
+            password = request.POST.get('password', '')
+            auth_user = authenticate(username=username, password=password)
             if auth_user is not None:
                 login(request, auth_user)
                 print("logged in")
                 return redirect(Home)
+
             else:
-                context = {
-                    'error': 'Invalid username or password',
-                }
-                print("invalid")
-                return render(request, 'login.html', context)
-    else:
-        context = {'iserror': False}
-        return render(request, 'login.html', context)
+                user = UserProfile.objects.get(email=username)
+                auth_user = authenticate(username=user.user.username, password=password)
+                if auth_user is not None:
+                    login(request, auth_user)
+                    print("logged in")
+                    return redirect(Home)
+                else:
+                    context = {
+                        'error': 'Invalid username or password',
+                    }
+                    print("invalid")
+                    return render(request, 'login.html', context)
+        else:
+            context = {'iserror': False}
+            return render(request, 'login.html', context)
+    except:
+        return redirect(Login)
 
 def Signup(request):
     if request.user.is_authenticated:
@@ -110,6 +131,15 @@ def edit_profile(request):
     return render(request, 'edit_profile.html', context)
 
 def User_Map(request):
+    """
+    Renders the user map page using leaflet.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The HTTP response containing the rendered user map page.
+    """
     user_profiles = UserProfile.objects.select_related('user').all().values(
         'latitude', 'longitude', 'user__first_name', 'user__last_name', 'user__email',
         'home_address', 'phone_number'
