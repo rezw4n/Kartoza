@@ -8,3 +8,6 @@ Note: Python 3.11 was used to create this program but you need to have at least 
 Activate the created virtual environment using ```venv\Scripts\activate``` if you're using windows and ```source venv/bin/activate``` if you're using Mac or Linux.
 
 Install the required package via pip with ```pip install -r requirements.txt``` and then run ```python manage.py runserver``` to run the Django website.
+
+# Admin Panel
+The username of the admin is: ```Kartoza``` and the password is: ```Kartoza```
